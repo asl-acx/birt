@@ -17,12 +17,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Arrays;
 
 import org.eclipse.birt.report.engine.util.ResourceLocatorWrapper;
 import org.eclipse.birt.report.engine.util.SvgFile;
+import org.eclipse.birt.report.model.api.ModuleHandle;
+import org.eclipse.birt.report.model.api.elements.structures.EmbeddedImage;
 import org.w3c.dom.css.CSSValue;
 
-import com.lowagie.text.Image;
+import com.itextpdf.text.Image;
 
 public class BackgroundImageInfo extends AreaConstants
 {
@@ -50,6 +53,38 @@ public class BackgroundImageInfo extends AreaConstants
 		this.rl = rl;
 		prepareImageByteArray( );
 	}
+	
+	public BackgroundImageInfo(String url, int repeatedMode, int xOffset,
+	                           int yOffset, int height, int width, ResourceLocatorWrapper rl, ModuleHandle moduleHandle) {
+		this(url, repeatedMode, xOffset, yOffset, height, width, rl);
+		if (imageData == null) {
+			this.imageData = getEmbeddedImage(url, moduleHandle);
+			prepareImage();
+		}
+	}
+	
+	private void prepareImage() {
+		try {
+			image = Image.getInstance(imageData);
+		} catch (Exception e) {
+			try {
+				imageData = SvgFile.transSvgToArray(new ByteArrayInputStream(imageData));
+				image = Image.getInstance(imageData);
+			} catch (Exception te) {
+				imageData = null;
+				image = null;
+			}
+		}
+	}
+	
+	private byte[] getEmbeddedImage(String url, ModuleHandle moduleHandle) {
+		EmbeddedImage embeddedImage = moduleHandle.findImage(url);
+		if (embeddedImage != null) {
+			byte[] imageData = embeddedImage.getData(moduleHandle.getModule());
+			return Arrays.copyOf(imageData, imageData.length);
+		}
+		return null;
+	}
 
 	public BackgroundImageInfo( BackgroundImageInfo bgi )
 	{
@@ -69,6 +104,13 @@ public class BackgroundImageInfo extends AreaConstants
 	{
 		this( url, mode != null ? repeatMap.get( mode ) : REPEAT, xOffset,
 				yOffset, height, width, rl );
+	}
+
+	public BackgroundImageInfo( String url, CSSValue mode, int xOffset,
+			int yOffset, int height, int width, ResourceLocatorWrapper rl, ModuleHandle moduleHandle )
+	{
+		this( url, mode != null ? repeatMap.get( mode ) : REPEAT, xOffset,
+				yOffset, height, width, rl, moduleHandle );
 	}
 
 	public BackgroundImageInfo( String url, int height, int width, ResourceLocatorWrapper rl )
@@ -134,25 +176,7 @@ public class BackgroundImageInfo extends AreaConstants
 			}
 		}
 
-		try
-		{
-
-			image = Image.getInstance( imageData );
-		}
-		catch ( Exception e )
-		{
-			try
-			{
-				imageData = SvgFile.transSvgToArray( new ByteArrayInputStream(
-						imageData ) );
-				image = Image.getInstance( imageData );
-			}
-			catch ( Exception te )
-			{
-				imageData = null;
-				image = null;
-			}
-		}
+		prepareImage();
 
 	}
 	

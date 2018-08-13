@@ -14,8 +14,8 @@ package org.eclipse.birt.report.engine.layout.pdf.font;
 import org.eclipse.birt.report.engine.emitter.EmitterUtil;
 import org.eclipse.birt.report.engine.layout.PDFConstants;
 
-import com.lowagie.text.Font;
-import com.lowagie.text.pdf.BaseFont;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.pdf.BaseFont;
 
 public class FontInfo
 {
@@ -227,8 +227,23 @@ public class FontInfo
 	public String getFontName( )
 	{
 		assert bf != null;
-		String[][] familyFontNames = bf.getFamilyFontName( );
-		String[] family = familyFontNames[familyFontNames.length - 1];
-		return family[family.length - 1];
+		String name = "";
+		String[][] fullFontName = bf.getFullFontName();
+		if (fullFontName.length > 0) {
+			String[] fontNames = fullFontName[0];
+			name = getBaseName(fontNames[fontNames.length - 1]);
+		}
+		return name;
+	}
+
+	private static final String[] FONT_POSTFIXES = {" Bold Italic", " Bold", " Italic", " Regular"};
+
+	private static String getBaseName(String name) {
+		for (String fontPostfix : FONT_POSTFIXES) {
+			if (name.endsWith(fontPostfix)) {
+				return name.substring(0, name.length() - fontPostfix.length());
+			}
+		}
+		return name;
 	}
 }

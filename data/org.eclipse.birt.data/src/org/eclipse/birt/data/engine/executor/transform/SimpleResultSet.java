@@ -49,9 +49,6 @@ import org.eclipse.birt.data.engine.impl.ComputedColumnHelper;
 import org.eclipse.birt.data.engine.impl.DataEngineSession;
 import org.eclipse.birt.data.engine.impl.DataSetRuntime;
 import org.eclipse.birt.data.engine.impl.DataSetRuntime.Mode;
-import org.eclipse.birt.data.engine.impl.FilterByRow;
-import org.eclipse.birt.data.engine.impl.IExecutorHelper;
-import org.eclipse.birt.data.engine.impl.StringTable;
 import org.eclipse.birt.data.engine.impl.document.StreamWrapper;
 import org.eclipse.birt.data.engine.impl.document.stream.StreamManager;
 import org.eclipse.birt.data.engine.impl.document.viewing.ExprMetaUtil;
@@ -63,10 +60,6 @@ import org.eclipse.birt.data.engine.odi.ICustomDataSet;
 import org.eclipse.birt.data.engine.odi.IDataSetPopulator;
 import org.eclipse.birt.data.engine.odi.IEventHandler;
 import org.eclipse.birt.data.engine.odi.IQuery.GroupSpec;
-import org.eclipse.birt.data.engine.odi.IResultClass;
-import org.eclipse.birt.data.engine.odi.IResultIterator;
-import org.eclipse.birt.data.engine.odi.IResultObject;
-import org.eclipse.birt.data.engine.odi.IResultObjectEvent;
 import org.eclipse.birt.data.engine.script.JSResultSetRow;
 import org.eclipse.birt.data.engine.script.OnFetchScriptHelper;
 import org.eclipse.birt.data.engine.storage.DataSetStore;
@@ -110,6 +103,8 @@ public class SimpleResultSet implements IResultIterator
 	
 	//TODO: refactor me. Add this for emergence -- release.
 	private boolean firstRowSaved = false;
+	// DataSetFromCache is needed for closing inputstream.
+	private DataSetFromCache dataSetFromCache;
 
 	
 	/**
@@ -207,6 +202,12 @@ public class SimpleResultSet implements IResultIterator
 				forceLookingForward );
 	}
 	
+	public SimpleResultSet(BaseQuery dataSourceQuery, IDataSetPopulator populator, IResultClass resultClass, IEventHandler handler,
+	                       GroupSpec[] groupSpecs, DataEngineSession session, boolean forceLookingForward, DataSetFromCache dataSetFromCache) throws DataException {
+		this(dataSourceQuery, populator, resultClass, handler, groupSpecs, session, forceLookingForward);
+		this.dataSetFromCache = dataSetFromCache;
+	}
+
 	private void initialize( BaseQuery baseQuery, IEventHandler handler,
 			SmartCacheRequest scRequest, IResultClass resultMetadata,
 			GroupSpec[] groupSpecs, DataEngineSession session,
@@ -350,6 +351,11 @@ public class SimpleResultSet implements IResultIterator
 	 */
 	public void close( ) throws DataException
 	{
+		if (dataSetFromCache != null) {
+			dataSetFromCache.close();
+			dataSetFromCache = null;
+		}
+	    	
 		if( this.isClosed )
 			return;
 		if ( this.closeable != null )

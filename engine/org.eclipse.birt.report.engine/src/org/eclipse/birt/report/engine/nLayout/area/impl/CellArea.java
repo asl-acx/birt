@@ -26,6 +26,7 @@ import org.eclipse.birt.report.engine.nLayout.area.style.BackgroundImageInfo;
 import org.eclipse.birt.report.engine.nLayout.area.style.BoxStyle;
 import org.eclipse.birt.report.engine.nLayout.area.style.DiagonalInfo;
 import org.eclipse.birt.report.engine.util.ResourceLocatorWrapper;
+import org.eclipse.birt.report.model.api.ModuleHandle;
 import org.w3c.dom.css.CSSValue;
 
 public class CellArea extends BlockContainerArea implements IContainerArea
@@ -136,6 +137,24 @@ public class CellArea extends BlockContainerArea implements IContainerArea
 		finished = true;
 		checkDisplayNone( );
 	}
+	
+	@Override
+	protected boolean checkPageBreak() throws BirtException {
+		boolean ret = false;
+		if ((this.rowSpan > 1 || !isInInlineStacking) && context.isAutoPageBreak()) {
+			int aHeight = getAllocatedHeight();
+			// When table resolves its bottom border, the total height may exceed the page body height.
+			// We add 3pt to avoid unexpected page break.
+			while (aHeight + parent.getAbsoluteBP() > context.getMaxBP()) {
+				if (!parent.autoPageBreak()) {
+					return false;
+				}
+				aHeight = getAllocatedHeight();
+				ret = true;
+			}
+		}
+		return ret;
+	}
 
 	public void initialize( ) throws BirtException
 	{
@@ -232,10 +251,11 @@ public class CellArea extends BlockContainerArea implements IContainerArea
 			{
 				rl = exeContext.getResourceLocator( );
 			}
+      ModuleHandle moduleHandle = context.getReport( ).getDesign( ).getReportDesign( ).getModuleHandle();
 			BackgroundImageInfo backgroundImage = new BackgroundImageInfo(
 					getImageUrl( url ),
 					style.getProperty( IStyle.STYLE_BACKGROUND_REPEAT ), 0, 0,
-					0, 0, rl );
+					0, 0, rl, moduleHandle );
 			boxStyle.setBackgroundImage( backgroundImage );
 		}
 		localProperties = new LocalProperties( );

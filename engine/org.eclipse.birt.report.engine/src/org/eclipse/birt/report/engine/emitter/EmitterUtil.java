@@ -50,7 +50,7 @@ import org.eclipse.birt.report.engine.util.SvgFile;
 import org.eclipse.birt.report.model.api.IResourceLocator;
 import org.eclipse.birt.report.model.api.ReportDesignHandle;
 
-import com.lowagie.text.Image;
+import com.itextpdf.text.Image;
 
 public class EmitterUtil
 {
@@ -582,8 +582,6 @@ public class EmitterUtil
 			return "FF00FF";
 		else if ( color.equalsIgnoreCase( "Maroon" ) )
 			return "800000";
-		else if ( color.equalsIgnoreCase( "Orange" ) )
-			return "#FFA500";
 		String[] values = color.substring( color.indexOf( "(" ) + 1,
 				color.length( ) - 1 ).split( "," );
 		String value = "";
