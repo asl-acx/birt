@@ -26,10 +26,10 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.lowagie.text.DocumentException;
-import com.lowagie.text.ExceptionConverter;
-import com.lowagie.text.pdf.IntHashtable;
-import com.lowagie.text.pdf.RandomAccessFileOrArray;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.ExceptionConverter;
+import com.itextpdf.text.pdf.IntHashtable;
+import com.itextpdf.text.pdf.RandomAccessFileOrArray;
 
 /**
  * Reads a Truetype font
@@ -618,7 +618,7 @@ public class TrueTypeFont
 			int offset = rf.readUnsignedShort( );
 			if ( nameID == id )
 			{
-				int pos = rf.getFilePointer( );
+				long  pos = rf.getFilePointer( );
 				rf.seek( table_location[0] + startOfStorage + offset );
 				String name;
 				if ( platformID == 0 || platformID == 3
