@@ -138,6 +138,24 @@ public class CellArea extends BlockContainerArea implements IContainerArea
 		checkDisplayNone( );
 	}
 
+	@Override
+	protected boolean checkPageBreak() throws BirtException {
+		boolean ret = false;
+		if ((this.rowSpan > 1 || !isInInlineStacking) && context.isAutoPageBreak()) {
+			int aHeight = getAllocatedHeight();
+			// When table resolves its bottom border, the total height may exceed the page body height.
+			// We add 3pt to avoid unexpected page break.
+			while (aHeight + parent.getAbsoluteBP() > context.getMaxBP()) {
+				if (!parent.autoPageBreak()) {
+					return false;
+				}
+				aHeight = getAllocatedHeight();
+				ret = true;
+			}
+		}
+		return ret;
+	}
+
 	public void initialize( ) throws BirtException
 	{
 		ICellContent cellContent = (ICellContent) content;

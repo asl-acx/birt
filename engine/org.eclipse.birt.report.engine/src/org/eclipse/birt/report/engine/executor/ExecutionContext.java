@@ -41,11 +41,13 @@ import org.eclipse.birt.core.script.ScriptExpression;
 import org.eclipse.birt.data.engine.api.IConditionalExpression;
 import org.eclipse.birt.data.engine.api.IDataQueryDefinition;
 import org.eclipse.birt.data.engine.api.IScriptExpression;
+import org.eclipse.birt.data.engine.impl.DataEngineImpl;
 import org.eclipse.birt.data.engine.script.ScriptEvalUtil;
 import org.eclipse.birt.report.data.adapter.api.AdapterException;
 import org.eclipse.birt.report.data.adapter.api.DataAdapterUtil;
 import org.eclipse.birt.report.data.adapter.api.DataRequestSession;
 import org.eclipse.birt.report.data.adapter.api.ILinkedResult;
+import org.eclipse.birt.report.data.adapter.impl.DataRequestSessionImpl;
 import org.eclipse.birt.report.engine.adapter.ProgressMonitorProxy;
 import org.eclipse.birt.report.engine.api.EngineConfig;
 import org.eclipse.birt.report.engine.api.EngineException;
@@ -331,7 +333,7 @@ public class ExecutionContext
 	/**
 	 * create a new context. Call close to finish using the execution context
 	 */
-	public ExecutionContext( EngineTask engineTask )
+	public ExecutionContext(EngineTask engineTask )
 	{
 		if ( engineTask != null )
 		{
@@ -467,6 +469,11 @@ public class ExecutionContext
 	 */
 	public void close( )
 	{
+		if (appContext != null) {
+			Object edgeImageCache = appContext.get("edge.image_cache");
+			if (edgeImageCache instanceof Closeable) IOUtils.closeQuietly((Closeable) edgeImageCache);
+		}
+
 		if ( extendedItemManager != null )
 		{
 			extendedItemManager.close( );
@@ -488,6 +495,8 @@ public class ExecutionContext
 		if ( dataEngine != null )
 		{
 			unRegisterDataObject( );
+			//clear DataEngineCache before shutdown
+			clearDataEngineCache();
 			dataEngine.shutdown( );
 			dataEngine = null;
 		}
@@ -512,17 +521,16 @@ public class ExecutionContext
 			dataSource = null;
 		}
 
-		IStatusHandler handler = task.getStatusHandler( );
-		if ( handler != null )
-		{
-			handler.finish( );
-		}
-		
-		// Do this last since it destroys the appContext which may be used by status handlers
 		if ( closeClassLoader
 				&& applicationClassLoader instanceof ApplicationClassLoader )
 		{
 			( (ApplicationClassLoader) applicationClassLoader ).close( );
+		}
+
+		IStatusHandler handler = task.getStatusHandler( );
+		if ( handler != null )
+		{
+			handler.finish( );
 		}
 
 		// RELEASE ALL THE MEMBERS EXPLICTLY AS THIS OBJECT MAY BE REFERENCED BY
@@ -532,8 +540,6 @@ public class ExecutionContext
 		// task = null;
 		executor = null;
 		tocBuilder = null;
-		runnable = null;
-		originalRunnable = null;
 		configs = null;
 		params = null;
 		persistentBeans = null;
@@ -558,6 +564,17 @@ public class ExecutionContext
 		eventHandlerManager = null;
 		progressMonitor = null;
 		element = null;
+	}
+	
+	private void clearDataEngineCache() {
+		try {
+			DataRequestSessionImpl dteSession = (DataRequestSessionImpl) dataEngine.getDTESession();
+			DataEngineImpl dataEngine = (DataEngineImpl) dteSession.getDataEngine();
+			if (dataEngine != null) {
+				dataEngine.clearCache();
+			}
+		} catch (BirtException e) {
+		}
 	}
 
 	/**

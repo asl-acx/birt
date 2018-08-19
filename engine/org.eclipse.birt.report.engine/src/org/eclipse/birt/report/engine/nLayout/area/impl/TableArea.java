@@ -35,7 +35,6 @@ import org.eclipse.birt.report.engine.executor.ExecutionContext;
 import org.eclipse.birt.report.engine.ir.DimensionType;
 import org.eclipse.birt.report.engine.ir.EngineIRConstants;
 import org.eclipse.birt.report.engine.ir.GridItemDesign;
-import org.eclipse.birt.report.engine.layout.LayoutUtil;
 import org.eclipse.birt.report.engine.layout.pdf.util.PropertyUtil;
 import org.eclipse.birt.report.engine.nLayout.LayoutContext;
 import org.eclipse.birt.report.engine.nLayout.area.IArea;
@@ -950,7 +949,7 @@ public class TableArea extends RepeatableArea
 				endCol = i;
 				if ( w == null )
 				{
-					columns[i] = LayoutUtil.getColWidthFromCellInFirstRow( table, i );
+					columns[i] = null;
 				}
 				else
 				{
