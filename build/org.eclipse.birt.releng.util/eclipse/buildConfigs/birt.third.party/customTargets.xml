@@ -84,11 +84,11 @@
 	<!-- ===================================================================== -->
 	<target name="preGenerate">
 		<!-- Copy itext jar-->
-		<copy todir="${buildDirectory}/plugins/com.lowagie.itext/lib">
+		<!-- <copy todir="${buildDirectory}/plugins/com.lowagie.itext/lib">
 			<fileset dir="${p4.home}/iText">
 				<include name="*.jar"/>
 			</fileset>
-		</copy>
+		</copy> -->
 	</target>
 
 	<!-- ===================================================================== -->

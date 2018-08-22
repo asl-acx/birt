@@ -126,12 +126,12 @@
          version="0.0.0"
          unpack="false"/>
 
-   <plugin
+   <!--<plugin
          id="com.lowagie.text"
          download-size="0"
          install-size="0"
          version="2.1.7.qualifier"
-         unpack="false"/>
+         unpack="false"/>-->
 
    <plugin
          id="org.apache.batik.bridge"

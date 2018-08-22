@@ -10,7 +10,7 @@
 	<artifactId>org.eclipse.birt.report.engine.emitter.odp</artifactId>
 	<packaging>eclipse-plugin</packaging>
 
-	<build>
+	<!--<build>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -30,5 +30,5 @@
 				</executions>
 			</plugin>
 		</plugins>
-	</build>
+	</build>-->
 </project>

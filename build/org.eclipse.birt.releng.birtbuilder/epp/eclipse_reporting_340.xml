@@ -312,10 +312,10 @@
     </feature>
   <!-- reporting specific configuration -->
 
-  <feature 
+  <!--<feature 
     id="com.lowagie.itext" 
     version="latest">
-  </feature>
+  </feature>-->
   <feature 
     id="org.apache.commons.codec" 
     version="latest">

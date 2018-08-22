@@ -24,9 +24,13 @@
 						</goals>
 						<configuration>
 							<outputDirectory>${project.basedir}/lib</outputDirectory>
-							<includeGroupIds>
+							<!--<includeGroupIds>
 								com.itextpdf,net.sf.jtidy
+							</includeGroupIds>-->
+							<includeGroupIds>
+								net.sf.jtidy
 							</includeGroupIds>
+
 						</configuration>
 					</execution>
 				</executions>
