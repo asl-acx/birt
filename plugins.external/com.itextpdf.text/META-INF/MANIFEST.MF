@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %bundleName
 Bundle-SymbolicName: com.itextpdf.text
 Bundle-Version: 5.5.13
-Bundle-ClassPath: itextpdf-5.5.13.jar
+Bundle-ClassPath: target/lib/itextpdf-5.5.13.jar
 Bundle-Localization: plugin
 Export-Package: com.itextpdf.text,
  com.itextpdf.text.exceptions,
@@ -27,4 +27,3 @@ Export-Package: com.itextpdf.text,
  com.itextpdf.text.xml.simpleparser,
  com.itextpdf.text.xml.xmp
 Bundle-RequiredExecutionEnvironment: J2SE-1.4
-Eclipse-SourceReferences: scm:cvs:pserver:dev.eclipse.org:/cvsroot/tools:org.eclipse.orbit/com.lowagie.text;tag=v201004222200
