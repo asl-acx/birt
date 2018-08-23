@@ -490,9 +490,9 @@
 			<fileset dir="../org.w3c.sac/lib">
 				<include name="*.jar"/>
 			</fileset>
-			<!--<fileset dir="${integrate.dir}/plugins">
-				<include name="com.lowagie.text_*/**" />
-			</fileset>-->
+			<fileset dir="${integrate.dir}/plugins">
+				<include name="com.itextpdf.text_*/**" />
+			</fileset>
 			<!-- datatools plugins -->
 			<fileset dir="${baseLocation}/plugins">
 		    	<include name="org.eclipse.datatools.connectivity_*/**"/>
