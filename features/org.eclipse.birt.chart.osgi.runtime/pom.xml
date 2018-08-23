@@ -11,15 +11,7 @@
 	<artifactId>org.eclipse.birt.chart.osgi.runtime</artifactId>
 	<packaging>eclipse-feature</packaging>
 	<build>
-
 		<plugins>
-
-<!-- temporally commented -->
-
-<!--
-[ERROR] Failed to execute goal org.eclipse.tycho.extras:tycho-source-feature-plugin:1.2.0:source-feature (source-feature) on project org.eclipse.birt.osgi.runtime: Could not generate source feature for project MavenProject: org.eclipse.birt.features:org.eclipse.birt.osgi.runtime:4.8.0-SNAPSHOT @ C:\Projects\BIRT\ascendix-birt\birt\features\org.eclipse.birt.osgi.runtime\pom.xml
-[ERROR]     Missing sources for plugins [org.apache.poi_3.11.0]
--->
    			<plugin>
 				<groupId>org.eclipse.tycho.extras</groupId>
 				<artifactId>tycho-source-feature-plugin</artifactId>

@@ -18,8 +18,6 @@
 				<version>${tycho.version}</version>
 				<configuration>
 					<excludes>
-						<plugin id="org.apache.poi"/>
-
 						<plugin id="javax.xml.rpc"/>
 						<plugin id="javax.xml.soap"/>
 						<plugin id="org.apache.axis"/>

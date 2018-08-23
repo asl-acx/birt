@@ -26,4 +26,4 @@ Export-Package: com.itextpdf.text,
  com.itextpdf.text.xml,
  com.itextpdf.text.xml.simpleparser,
  com.itextpdf.text.xml.xmp
-Bundle-RequiredExecutionEnvironment: J2SE-1.4
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
