@@ -103,7 +103,6 @@
 			<patternset>
 				<include name="plugins/"/>
 				<exclude name="plugins/*.jar"/>
-				<exclude name="plugins/*.nl1/**"/>
 				<exclude name="plugins/*.source_*/**"/>
 				<exclude name="plugins/*_?.?.?.*/**"/>
 			</patternset>
@@ -123,7 +122,6 @@
 			<fileset dir="${path}/org.eclipse.birt.report.data.adapter/src" includes="**"/>
 			<fileset dir="${path}/org.eclipse.birt.report.data.bidi.utils/src" includes="**"/>
 			<fileset dir="${path}/org.eclipse.birt.report.data.oda.jdbc/src" includes="**"/>
-			<fileset dir="${path}/org.eclipse.birt.report.data.oda.hive/src" includes="**"/>
 			<fileset dir="${path}/org.eclipse.birt.report.data.oda.excel/src" includes="**"/>
 			<fileset dir="${path}/org.eclipse.birt.report.data.oda.sampledb/src" includes="**"/>
 			<fileset dir="${path}/org.eclipse.birt.report.data.oda.xml/src" includes="**"/>
