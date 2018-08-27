@@ -146,6 +146,8 @@
 					<configuration>
 						<useProjectSettings>false</useProjectSettings>
 						<verbose>true</verbose>
+						<showWarnings>true</showWarnings>
+						<strictCompilerTarget>true</strictCompilerTarget>
 					</configuration>
 				</plugin>
 
