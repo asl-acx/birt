@@ -145,7 +145,7 @@
 					<configuration>
 						<useProjectSettings>false</useProjectSettings>
 						<verbose>true</verbose>
-						<showWarnings>true</showWarnings>
+						<showWarnings>false</showWarnings>
 						<strictCompilerTarget>true</strictCompilerTarget>
 						<encoding>UTF-8</encoding>
 					</configuration>
