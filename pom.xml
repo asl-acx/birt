@@ -148,6 +148,7 @@
 						<verbose>true</verbose>
 						<showWarnings>true</showWarnings>
 						<strictCompilerTarget>true</strictCompilerTarget>
+						<encoding>UTF-8</encoding>
 					</configuration>
 				</plugin>
 
