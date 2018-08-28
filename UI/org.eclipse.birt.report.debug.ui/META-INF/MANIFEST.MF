@@ -4,7 +4,6 @@ Bundle-Name: BIRT Debug UI Plug-in
 Bundle-SymbolicName: org.eclipse.birt.report.debug.ui; singleton:=true
 Bundle-Version: 4.8.0.qualifier
 Bundle-Vendor: Eclipse BIRT Project
-Bundle-Localization: plugin
 Export-Package: org.eclipse.birt.report.debug.internal.script.model,
  org.eclipse.birt.report.debug.internal.ui.launcher,
  org.eclipse.birt.report.debug.internal.ui.launcher.util,

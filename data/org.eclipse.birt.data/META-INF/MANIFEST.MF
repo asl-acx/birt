@@ -7,7 +7,6 @@ Bundle-ClassPath: library.jar,
  .
 Bundle-Activator: org.eclipse.birt.data.engine.plugin.DataEnginePlugin
 Bundle-Vendor: Eclipse BIRT Project
-Bundle-Localization: plugin
 Eclipse-ExtensibleAPI: true
 Export-Package: javax.olap,
  javax.olap.cursor,

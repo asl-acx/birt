@@ -6,7 +6,6 @@ Bundle-Version: 4.8.0.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: org.eclipse.birt.data.oda.pojo.Activator
 Bundle-Vendor: Eclipse BIRT Project
-Bundle-Localization: plugin
 Export-Package: org.eclipse.birt.data.oda.pojo.api,
  org.eclipse.birt.data.oda.pojo.impl;x-friends:="org.eclipse.birt.data.oda.pojo.ui,org.eclipse.birt.data.oda.pojo.tests",
  org.eclipse.birt.data.oda.pojo.impl.internal;x-friends:="org.eclipse.birt.data.oda.pojo.tests",

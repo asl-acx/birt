@@ -6,7 +6,6 @@ Bundle-Version: 4.8.0.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: org.eclipse.birt.report.data.oda.excel.Activator
 Bundle-Vendor: Eclipse BIRT Project
-Bundle-Localization: plugin
 Export-Package: org.eclipse.birt.report.data.oda.excel,
  org.eclipse.birt.report.data.oda.excel.impl;version="1.0.0.qualifier",
  org.eclipse.birt.report.data.oda.excel.impl.util,

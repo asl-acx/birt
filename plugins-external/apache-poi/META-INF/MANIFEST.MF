@@ -7,7 +7,6 @@ Bundle-ClassPath: target/ooxml-schemas-1.1.jar,
  target/poi-3.11.jar,
  target/poi-ooxml-3.11.jar,
  target/poi-ooxml-schemas-3.11.jar
-Bundle-Localization: plugin
 Export-Package: org.apache.poi,
  org.apache.poi.common.usermodel,
  org.apache.poi.ddf,
