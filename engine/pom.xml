@@ -47,19 +47,10 @@
 		<module>org.eclipse.birt.report.engine.fonts</module>
 		<module>org.eclipse.birt.report.engine.odf</module>
 		<module>org.eclipse.birt.report.engine.ooxml</module>
-		<module>org.eclipse.birt.report.engine.testhelper</module>
 		<module>org.eclipse.birt.report.engine.tests</module>
 		<module>uk.co.spudsoft.birt.emitters.excel</module>
 		<module>uk.co.spudsoft.birt.emitters.excel.tests</module>
 	</modules>
-
-	<dependencies>
-		<dependency>
-			<groupId>net.sf.jtidy</groupId>
-			<artifactId>jtidy</artifactId>
-			<version>r938</version>
-		</dependency>
-	</dependencies>
 
 	<build>
 		<sourceDirectory>src</sourceDirectory>
