@@ -623,7 +623,6 @@
             <version>62.1</version> <!-- 56.1 -->
         </dependency>
 
-        <!-- TODO: extract jtidy-r938.jar from org.eclipse.birt.report.engine/lib (if possible) -->
         <dependency>
             <groupId>net.sf.jtidy</groupId>
             <artifactId>jtidy</artifactId>
@@ -748,6 +747,17 @@
             <artifactId>sac</artifactId>
             <version>1.3</version>  <!-- latest? -->
         </dependency>
+
+	<!-- TODO extract lib/flute.jar from common/org.w3c.sac -->
+	<!--
+	Bundle-SymbolicName: org.w3c.sac
+	Bundle-ClassPath: lib/flute.jar
+	-->
+	<dependency>
+    	    <groupId>org.milyn</groupId>
+    	    <artifactId>flute</artifactId>
+    	    <version>1.3</version> <!-- latest -->
+	</dependency>
 
         <!-- javax.xml.stream;bundle-version="1.0.1" -->
         <dependency>
